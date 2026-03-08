@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gumroad Chargeback Shield — Free 3-Minute Scenario Quiz</title>
+  <meta name="description" content="Free 3-minute quiz: classify your Gumroad/Stripe chargeback situation and get a safe next-step plan. No guarantees." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #060b16;
+      --panel: #121c31;
+      --panel-2: #16233d;
+      --line: rgba(255,255,255,.10);
+      --line-strong: rgba(255,255,255,.16);
+      --text: #eef4ff;
+      --muted: #9db0d3;
+      --muted-2: #6f84ad;
+      --blue: #3b82f6;
+      --cyan: #06b6d4;
+      --purple: #7c3aed;
+      --green: #22c55e;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --orange: #fb923c;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+
+    html, body {
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, rgba(124,58,237,.16), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100%;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(59,130,246,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 24px 18px 50px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .hero {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .hero-icon {
+      width: 62px;
+      height: 62px;
+      min-width: 62px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      background: linear-gradient(135deg, rgba(59,130,246,.22), rgba(124,58,237,.22));
+      border: 1px solid rgba(59,130,246,.35);
+      box-shadow: 0 0 30px rgba(59,130,246,.18);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 2.4vw, 2.3rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+
+    h1 .grad {
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    .banner {
+      margin-top: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(251,146,60,.25);
+      background: rgba(251,146,60,.08);
+      padding: 12px 14px;
+      color: #f7b07f;
+      line-height: 1.55;
+      font-size: .92rem;
+    }
+
+    .banner strong {
+      display: block;
+      color: #ffb27a;
+      margin-bottom: 4px;
+    }
+
+    .how {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .how-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.03);
+      padding: 14px;
+    }
+
+    .how-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: .86rem;
+      margin-bottom: 10px;
+    }
+
+    .how-card p {
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.45;
+    }
+
+    .progress-wrap {
+      margin-top: 18px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      color: var(--muted-2);
+      font-size: .82rem;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--blue), var(--purple));
+      transition: width .25s ease;
+    }
+
+    .question {
+      padding: 18px 0;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .question.hidden {
+      display: none;
+    }
+
+    .q-title {
+      color: var(--text);
+      font-size: 1.02rem;
+      line-height: 1.45;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .q-help {
+      color: var(--muted-2);
+      font-size: .92rem;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .option {
+      appearance: none;
+      border: 1px solid var(--line-strong);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      padding: 12px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .15s ease;
+      min-width: 150px;
+      flex: 1 1 auto;
+      text-align: left;
+      position: relative;
+      line-height: 1.35;
+    }
+
+    .option:hover {
+      transform: translateY(-1px);
+      border-color: rgba(59,130,246,.55);
+      color: var(--text);
+      background: rgba(59,130,246,.08);
+    }
+
+    .option.selected {
+      background: rgba(59,130,246,.16);
+      color: white;
+      border: 2px solid #3b82f6;
+      box-shadow: 0 0 0 1px rgba(59,130,246,.20), 0 10px 24px rgba(59,130,246,.14);
+      padding-right: 40px;
+      font-weight: 800;
+    }
+
+    .option.selected::after {
+      content: "✓";
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #86efac;
+      font-weight: 900;
+      font-size: 1rem;
+    }
+
+    .primary-btn, .ghost-btn, .cta-btn {
+      appearance: none;
+      border: 0;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: .15s ease;
+      padding: 14px 18px;
+      font-size: .96rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .primary-btn {
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      box-shadow: 0 12px 28px rgba(59,130,246,.25);
+      width: 100%;
+      margin-top: 18px;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 34px rgba(59,130,246,.33);
+    }
+
+    .result {
+      display: none;
+    }
+
+    .result.active {
+      display: block;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: .82rem;
+      font-weight: 800;
+      border: 1px solid var(--line-strong);
+      background: rgba(255,255,255,.03);
+      color: #dce9ff;
+      margin-bottom: 12px;
+    }
+
+    .badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .badge.green {
+      color: #86efac;
+      background: rgba(34,197,94,.09);
+      border-color: rgba(34,197,94,.22);
+    }
+
+    .badge.yellow {
+      color: #fde68a;
+      background: rgba(245,158,11,.10);
+      border-color: rgba(245,158,11,.20);
+    }
+
+    .badge.red {
+      color: #fca5a5;
+      background: rgba(239,68,68,.10);
+      border-color: rgba(239,68,68,.22);
+    }
+
+    .badge.blue {
+      color: #bfdbfe;
+      background: rgba(59,130,246,.10);
+      border-color: rgba(59,130,246,.20);
+    }
+
+    .result-title {
+      font-size: 1.5rem;
+      line-height: 1.25;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .result-copy {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: .96rem;
+      margin-bottom: 14px;
+    }
+
+    .section {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .section h3 {
+      margin: 0 0 10px;
+      font-size: .92rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #b8c9e8;
+    }
+
+    .section ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.58;
+      font-size: .94rem;
+    }
+
+    .section li + li {
+      margin-top: 6px;
+    }
+
+    .danger {
+      border-color: rgba(239,68,68,.18);
+      background: rgba(239,68,68,.06);
+    }
+
+    .danger h3 {
+      color: #fca5a5;
+    }
+
+    .cta {
+      margin-top: 18px;
+      border: 1px solid rgba(124,58,237,.25);
+      background: linear-gradient(135deg, rgba(59,130,246,.14), rgba(124,58,237,.14));
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .cta h3 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .cta p {
+      color: var(--muted);
+      line-height: 1.58;
+      margin-bottom: 12px;
+    }
+
+    .cta ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.58;
+      font-size: .94rem;
+    }
+
+    .cta-btn {
+      margin-top: 14px;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      box-shadow: 0 12px 28px rgba(59,130,246,.25);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 34px rgba(59,130,246,.33);
+    }
+
+    .restart {
+      margin-top: 14px;
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      color: var(--muted);
+      padding: 12px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 800;
+      width: 100%;
+    }
+
+    .restart:hover {
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted-2);
+      font-size: .86rem;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 860px) {
+      .how {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        flex-direction: column;
+      }
+
+      .hero-icon {
+        width: 58px;
+        height: 58px;
+      }
+
+      .card, .section, .cta {
+        padding: 14px;
+      }
+
+      .option {
+        min-width: 100%;
+      }
+
+      .q-title {
+        font-size: .98rem;
+      }
+
+      .result-title {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="card" id="quizCard">
+      <div class="hero">
+        <div class="hero-icon">🛡️</div>
+        <div>
+          <h1>Gumroad <span class="grad">Chargeback Shield</span> — Free Scenario Quiz</h1>
+          <div class="subtitle">Classify your situation and get a safe next-step plan in about 3 minutes.</div>
+          <div class="banner">
+            <strong>No guarantees.</strong>
+            This tool helps classify your dispute scenario and organize next steps. It does not promise wins, timelines, or outcomes.
+          </div>
+        </div>
+      </div>
+
+      <div class="how">
+        <div class="how-card">
+          <div class="how-num">1</div>
+          <p>Answer 6 quick questions about your dispute situation.</p>
+        </div>
+        <div class="how-card">
+          <div class="how-num">2</div>
+          <p>Get a scenario label: Refund / Fight / Borderline / Need clarity.</p>
+        </div>
+        <div class="how-card">
+          <div class="how-num">3</div>
+          <p>Receive a minimal safe plan plus common mistakes to avoid.</p>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-top">
+          <span id="progressLabel">Question 1 of 6</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+
+      <div class="question" id="q1">
+        <div class="q-title">1) Where is the dispute handled?</div>
+        <div class="q-help">This changes what you control: your own processor versus Gumroad workflow.</div>
+        <div class="options">
+          <button type="button" class="option" onclick="pick(1,'connect')">Stripe / PayPal Connect</button>
+          <button type="button" class="option" onclick="pick(1,'nonconnect')">Gumroad workflow</button>
+          <button type="button" class="option" onclick="pick(1,'unsure')">Not sure</button>
+        </div>
+      </div>
+
+      <div class="question hidden" id="q2">
+        <div class="q-title">2) What stage are you at?</div>
+        <div class="q-help">Choose the closest match. If unsure, choose the earliest stage you can confirm.</div>
+        <div class="options">
+          <button type="button" class="option" onclick="pick(2,'threat')">Threat</button>
+          <button type="button" class="option" onclick="pick(2,'predispute')">Pre-dispute inquiry</button>
+          <button type="button" class="option" onclick="pick(2,'filed')">Chargeback filed</button>
+          <button type="button" class="option" onclick="pick(2,'refund')">Refund request</button>
+        </div>
+      </div>
+
+      <div class="question hidden" id="q3">
+        <div class="q-title">3) Do you have proof of delivery or access?</div>
+        <div class="q-help">Examples: download logs, access timestamps, shipment confirmation, access email logs.</div>
+        <div class="options">
+          <button type="button" class="option" onclick="pick(3,'yes')">Yes</button>
+          <button type="button" class="option" onclick="pick(3,'partial')">Partial</button>
+          <button type="button" class="option" onclick="pick(3,'no')">No</button>
+        </div>
+      </div>
+
+      <div class="question hidden" id="q4">
+        <div class="q-title">4) Do you have a clear policy shown to the buyer?</div>
+        <div class="q-help">Refund or fulfillment policy + where it was visible (page, checkout, receipt, etc.).</div>
+        <div class="options">
+          <button type="button" class="option" onclick="pick(4,'yes')">Visible</button>
+          <button type="button" class="option" onclick="pick(4,'unsure')">Not sure</button>
+          <button type="button" class="option" onclick="pick(4,'no')">Missing</button>
+        </div>
+      </div>
+
+      <div class="question hidden" id="q5">
+        <div class="q-title">5) What is the main dispute reason?</div>
+        <div class="q-help">Pick the closest bank or buyer claim.</div>
+        <div class="options">
+          <button type="button" class="option" onclick="pick(5,'fraud')">Unauthorized / Fraud</button>
+          <button type="button" class="option" onclick="pick(5,'notreceived')">Not received</button>
+          <button type="button" class="option" onclick="pick(5,'notasdescribed')">Not as described</button>
+          <button type="button" class="option" onclick="pick(5,'refundnotprocessed')">Refund not processed</button>
+        </div>
+      </div>
+
+      <div class="question hidden" id="q6">
+        <div class="q-title">6) Do you have buyer communication records?</div>
+        <div class="q-help">Email, chat, support messages showing you responded or clarified delivery.</div>
+        <div class="options">
+          <button type="button" class="option" onclick="pick(6,'yes')">Yes</button>
+          <button type="button" class="option" onclick="pick(6,'some')">Some</button>
+          <button type="button" class="option" onclick="pick(6,'no')">None</button>
+        </div>
+      </div>
+
+      <button type="button" class="primary-btn hidden" id="analyzeBtn" onclick="analyzeQuiz()">Get my scenario & next steps</button>
+    </div>
+
+    <div class="card result" id="resultCard"></div>
+
+    <div class="card footer">
+      Educational guidance only. Not legal advice. Not affiliated with Gumroad, Stripe, PayPal, banks, or card networks.
+    </div>
+  </div>
+
+  <script>
+    const state = { answers: {} };
+    const ctaUrl = "https://riskvault.gumroad.com/l/thzvxl";
+
+    function pick(questionNumber, value) {
+      state.answers[questionNumber] = value;
+
+      const q = document.getElementById("q" + questionNumber);
+      q.querySelectorAll(".option").forEach(btn => btn.classList.remove("selected"));
+
+      const match = Array.from(q.querySelectorAll(".option")).find(btn => {
+        return btn.getAttribute("onclick") === `pick(${questionNumber},'${value}')`;
+      });
+      if (match) match.classList.add("selected");
+
+      if (questionNumber < 6) {
+        document.getElementById("q" + (questionNumber + 1)).classList.remove("hidden");
+      } else {
+        document.getElementById("analyzeBtn").classList.remove("hidden");
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const answered = Object.keys(state.answers).length;
+      const pct = Math.min(100, Math.round((answered / 6) * 100));
+      document.getElementById("progressFill").style.width = pct + "%";
+      document.getElementById("progressPct").textContent = pct + "%";
+      document.getElementById("progressLabel").textContent = `Question ${Math.min(answered + 1, 6)} of 6`;
+      if (answered === 6) {
+        document.getElementById("progressLabel").textContent = "Ready to analyze";
+      }
+    }
+
+    function analyzeQuiz() {
+      if (Object.keys(state.answers).length < 6) return;
+
+      const a1 = state.answers[1];
+      const a2 = state.answers[2];
+      const a3 = state.answers[3];
+      const a4 = state.answers[4];
+      const a5 = state.answers[5];
+      const a6 = state.answers[6];
+
+      let scenario = "R3";
+      let badgeClass = "yellow";
+      let title = "Borderline — fill the main evidence gaps first";
+      let intro = "You have part of the structure, but one or two weak areas should be fixed before you decide whether to fight or de-escalate.";
+      let why = [];
+      let next = [];
+      let dont = [];
+
+      if (a1 === "unsure") {
+        scenario = "R4";
+        badgeClass = "blue";
+        title = "Need clarity — confirm your dispute lane first";
+        intro = "Before doing anything else, confirm whether the dispute is handled through your own processor or through Gumroad workflow.";
+        why = [
+          "Your dispute lane changes deadlines, control, and where evidence is submitted."
+        ];
+        next = [
+          "Confirm whether this is Stripe/PayPal Connect or Gumroad-managed workflow.",
+          "Find the exact dispute reason and where evidence must be submitted.",
+          "Only then decide whether to de-escalate or fight."
+        ];
+      } else {
+        const weakDelivery = a3 === "no";
+        const weakPolicy = a4 === "no";
+        const notAsDescribed = a5 === "notasdescribed";
+        const strongMinimum = a3 === "yes" && a4 === "yes" && (a6 === "yes" || a6 === "some");
+
+        if (weakDelivery || (notAsDescribed && (weakPolicy || a3 !== "yes"))) {
+          scenario = "R1";
+          badgeClass = "red";
+          title = "De-escalate — lowest regret path";
+          intro = "If you lack delivery or access proof, or the listing and policy were weak, escalation can create more damage than clarity.";
+          if (weakDelivery) why.push("No solid delivery/access proof makes the dispute much harder to defend.");
+          if (weakPolicy) why.push("Missing or unclear policy proof increases expectation mismatch risk.");
+          if (notAsDescribed) why.push("Not-as-described disputes rely heavily on listing clarity and what the buyer saw.");
+          next = [
+            "Consider whether partial or full refund is the lower-risk path.",
+            "If you refund, document the refund clearly with date, amount, and confirmation.",
+            "Tighten listing clarity and policy visibility to reduce repeat disputes."
+          ];
+        } else if (strongMinimum && (a5 === "fraud" || a5 === "refundnotprocessed" || a2 === "filed")) {
+          scenario = "R2";
+          badgeClass = "green";
+          title = "Fight — you have the minimum structure";
+          intro = "You have the core evidence needed to assemble a clean, factual submission packet.";
+          why = [
+            "Delivery/access proof is present.",
+            "Policy visibility is present.",
+            "There is at least some communication history."
+          ];
+          next = [
+            "Assemble one clean packet: order proof, listing snapshot, policy proof, delivery/access proof, communication, timeline.",
+            "Keep your narrative short and factual.",
+            "Submit once, then avoid repeated follow-ups unless requested."
+          ];
+        } else {
+          scenario = "R3";
+          badgeClass = "yellow";
+          title = "Borderline — fix 1–2 gaps before deciding";
+          intro = "You are close, but your evidence is not clean enough yet for a confident fight decision.";
+          if (a3 === "partial") why.push("Delivery/access proof is incomplete or unclear.");
+          if (a4 === "unsure") why.push("Policy visibility is unclear.");
+          if (a6 === "no") why.push("No communication record reduces good-faith context.");
+          next = [
+            "Strengthen the weakest evidence gap first.",
+            "If the packet still looks weak after that, de-escalation may be safer.",
+            "If the core packet becomes clear, then consider a structured submission."
+          ];
+        }
+      }
+
+      dont = [
+        "Do not fabricate, edit, or improve evidence.",
+        "Do not send irrelevant screenshots or extra noise.",
+        "Do not write long emotional messages instead of a clean packet."
+      ];
+
+      if (a2 === "threat") {
+        dont.push("Do not escalate with threats or emotional replies to the buyer.");
+      }
+
+      const emphasis = getEmphasis(a5);
+      const fullKitBullets = [
+        "Evidence Vault folder structure",
+        "Dispute-specific checklist",
+        "Concise submission skeleton",
+        "Ready-to-use structured toolkit"
+      ];
+
+      const html = `
+        <div class="badge ${badgeClass}">${scenario}</div>
+        <div class="result-title">${escapeHtml(title)}</div>
+        <div class="result-copy">${escapeHtml(intro)}</div>
+
+        <div class="section">
+          <h3>Why you landed here</h3>
+          <ul>${why.map(x => `<li>${escapeHtml(x)}</li>`).join("") || "<li>Scenario classified from your evidence pattern and dispute stage.</li>"}</ul>
+        </div>
+
+        <div class="section">
+          <h3>Recommended emphasis</h3>
+          <ul>${emphasis.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
+        </div>
+
+        <div class="section">
+          <h3>Safe next steps</h3>
+          <ul>${next.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
+        </div>
+
+        <div class="section danger">
+          <h3>Do not do this</h3>
+          <ul>${dont.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
+        </div>
+
+        <div class="cta">
+          <h3>Need the full Chargeback Evidence Builder?</h3>
+          <p>Get the full structured toolkit designed to help you organize evidence and build a clean, submission-ready packet.</p>
+          <ul>${fullKitBullets.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
+          <a class="cta-btn" href="${ctaUrl}" target="_blank" rel="noopener noreferrer">Open the full kit</a>
+        </div>
+
+        <button type="button" class="restart" onclick="restartQuiz()">Start over</button>
+      `;
+
+      document.getElementById("quizCard").style.display = "none";
+      const resultCard = document.getElementById("resultCard");
+      resultCard.innerHTML = html;
+      resultCard.classList.add("active");
+      resultCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function getEmphasis(reason) {
+      const map = {
+        fraud: [
+          "Emphasize transaction ID and delivery/access timestamp.",
+          "Tie access or delivery proof directly to the order.",
+          "Avoid speculation about who committed fraud."
+        ],
+        notreceived: [
+          "Emphasize delivery method, access logs, and timestamps.",
+          "Show the order-to-delivery chain clearly.",
+          "Avoid long explanations without evidence references."
+        ],
+        notasdescribed: [
+          "Emphasize listing screenshots, scope, preview, and policy visibility.",
+          "Show exactly what the buyer saw before purchase.",
+          "Avoid emotional defence and vague quality claims."
+        ],
+        refundnotprocessed: [
+          "Emphasize refund confirmation, exact date/time, and support messages.",
+          "Show clear evidence of the refund handling path.",
+          "Avoid generic statements without proof."
+        ]
+      };
+      return map[reason] || [
+        "Emphasize the clearest, most factual evidence first.",
+        "Keep the packet short and structured.",
+        "Avoid extra noise."
+      ];
+    }
+
+    function restartQuiz() {
+      state.answers = {};
+      for (let i = 1; i <= 6; i++) {
+        const q = document.getElementById("q" + i);
+        q.classList.toggle("hidden", i !== 1);
+        q.querySelectorAll(".option").forEach(btn => btn.classList.remove("selected"));
+      }
+      document.getElementById("analyzeBtn").classList.add("hidden");
+      document.getElementById("progressFill").style.width = "0%";
+      document.getElementById("progressPct").textContent = "0%";
+      document.getElementById("progressLabel").textContent = "Question 1 of 6";
+      document.getElementById("resultCard").classList.remove("active");
+      document.getElementById("resultCard").innerHTML = "";
+      document.getElementById("quizCard").style.display = "";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
